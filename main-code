@@ -1,0 +1,23 @@
+# DATA VISUALIZATION USING SEABORN AND MATPLOTLIB
+
+
+import pandas as pd        # pandas for data handiling
+import seaborn as sns     # Seaborn for visualization
+from sklearn.datasets import load_iris
+
+import matplotlib.pyplot as plt        # matplotlib for fine tuning plots
+
+# Sample dataset: Iris
+iris = load_iris()       # load_iris() is a convenient way to access a well known datasets for testing visualization
+df = pd.DataFrame(iris.data, columns=iris.feature_names)
+df['species'] = pd.Categorical.from_codes(iris.target, iris.target_names)     # pd.Categorical is efficient since species is a categorical variables
+
+# Pairplot for best visualization
+sns.set(style="whitegrid")                    # Improves readability with clean grid background
+pairplot = sns.pairplot(df, hue="species", palette="Set2", diag_kind="kde")            # sns.pairplot() is excellent for exploring relationships between multiple explores
+plt.suptitle("Iris Dataset Pairplot", y=1.02) # plt.suptitle() adds a clear title above the plot
+plt.show()
+
+# hue="species" --> colors points by species, making classification patterns visible
+# palette="Set2" --> Provides a visually pleasing color scheme
+# diag-kind="kde" --> which is used to density estimation instead of histograms for smoother distribution
